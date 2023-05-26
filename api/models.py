@@ -31,10 +31,6 @@ class Owner(models.Model):
     province = models.CharField(max_length=50)
 
 
-class PrimarySequence(models.Model):
-    next_val = models.BigIntegerField()
-
-
 class Upload(models.Model):
     upload_id = models.IntegerField(primary_key=True)
     file_name = models.CharField(max_length=50)
