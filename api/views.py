@@ -4,6 +4,10 @@ from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework import mixins
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+from registrytotal import settings
 
 from .models import *
 from .serializers import *
@@ -59,36 +63,20 @@ class InspectionRecordByCenterViewSet(viewsets.ModelViewSet):
 
 
 class UserRegisterView(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    serializer_class = UserRegisterSerializer
+    serializer_class = UserLoginSerializer
     queryset = User.objects.all()
 
     def create(self, request, *args, **kwargs):
-        serializer = UserRegisterSerializer(data=request.data)
+        serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
             serializer.validated_data["password"] = make_password(
                 serializer.validated_data["password"]
             )
             serializer.save(user_type="1")
-            return JsonResponse(
+            return Response(
                 {"message": "User created successfully"}, status=status.HTTP_201_CREATED
             )
-        return JsonResponse(
+        return Response(
             {"message": "Email exists", "errors": serializer.errors},
             status=status.HTTP_400_BAD_REQUEST,
         )
-
-    # def post(self, request, format=None):
-    #     serializer = UserSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.validated_data["password"] = make_password(
-    #             serializer.validated_data["password"]
-    #         )
-    #         serializer.save(user_type="1")
-    #         return JsonResponse(
-    #             {"message": "User created successfully"}, status=status.HTTP_201_CREATED
-    #         )
-    #     else:
-    #         return JsonResponse(
-    #             {"message": "Email exists", "errors": serializer.errors},
-    #             status=status.HTTP_400_BAD_REQUEST,
-    #         )

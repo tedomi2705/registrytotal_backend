@@ -36,7 +36,7 @@ class VehicleSerializer(serializers.ModelSerializer):
         model = Vehicle
         fields = '__all__'
         
-class UserRegisterSerializer(serializers.ModelSerializer):
+class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'password']

@@ -1,6 +1,7 @@
 from . import views
 from rest_framework import routers
 from django.urls import path, include
+from rest_framework_simplejwt import views as jwt_views
 
 router = routers.DefaultRouter()
 router.register(r'inspection', views.InspectionViewSet)
@@ -15,5 +16,6 @@ router.register(r'register', views.UserRegisterView)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('login/', jwt_views.TokenObtainPairView.as_view(), name='login'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
