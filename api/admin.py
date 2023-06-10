@@ -22,8 +22,8 @@ class UploadAdmin(admin.ModelAdmin):
 admin.site.register(Upload, UploadAdmin)
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('user_id', 'username', 'email', 'password', 'user_type')
-    list_filter = ('username', 'user_type')
+    list_display = ('user_id', 'email', 'password', 'user_type')
+    list_filter = ('email', 'user_type')
 admin.site.register(User, UserAdmin)
 
 class VehicleAdmin(admin.ModelAdmin):
