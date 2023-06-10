@@ -11,6 +11,7 @@ router.register(r'upload', views.UploadViewSet)
 router.register(r'user', views.UserViewSet)
 router.register(r'vehicle', views.VehicleViewSet)
 router.register(r'inspectionrecordbycenter', views.InspectionRecordByCenterViewSet)
+router.register(r'register', views.UserRegisterView)
 
 urlpatterns = [
     path('', include(router.urls)),

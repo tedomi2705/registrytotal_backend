@@ -16,6 +16,7 @@ class InspectionCenter(models.Model):
     center_name = models.CharField(max_length=50)
     province = models.CharField(max_length=50)
     user_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    zip_code = models.CharField(max_length=10, blank=True, null=True)
 
 
 class InspectionRecord(models.Model):
