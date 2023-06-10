@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
@@ -41,6 +41,7 @@ class UploadViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAdminUser,)
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
@@ -63,6 +64,7 @@ class InspectionRecordByCenterViewSet(viewsets.ModelViewSet):
 
 
 class UserRegisterView(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    permission_classes = (permissions.AllowAny,)
     serializer_class = UserLoginSerializer
     queryset = User.objects.all()
 
