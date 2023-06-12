@@ -74,7 +74,7 @@ class UserRegisterView(mixins.CreateModelMixin, viewsets.GenericViewSet):
             serializer.validated_data["password"] = make_password(
                 serializer.validated_data["password"]
             )
-            serializer.save(user_type="1")
+            serializer.save(user_type="1", first_name="no", last_name="name")
             return Response(
                 {"message": "User created successfully"}, status=status.HTTP_201_CREATED
             )
@@ -82,3 +82,12 @@ class UserRegisterView(mixins.CreateModelMixin, viewsets.GenericViewSet):
             {"message": "Email exists", "errors": serializer.errors},
             status=status.HTTP_400_BAD_REQUEST,
         )
+
+class LoggedInUserViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        # Return the queryset for logged-in users
+        user = self.request.user
+        return User.objects.filter(pk=user.pk)

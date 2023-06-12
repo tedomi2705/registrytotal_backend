@@ -9,10 +9,11 @@ router.register(r'inspectioncenter', views.InspectionCenterViewSet)
 router.register(r'inspectionrecord', views.InspectionRecordViewSet)
 router.register(r'owner', views.OwnerViewSet)
 router.register(r'upload', views.UploadViewSet)
-router.register(r'user', views.UserViewSet)
+router.register(r'users', views.UserViewSet)
 router.register(r'vehicle', views.VehicleViewSet)
 router.register(r'inspectionrecordbycenter', views.InspectionRecordByCenterViewSet)
 router.register(r'register', views.UserRegisterView)
+router.register(r'user/me',views.LoggedInUserViewSet,basename='me')
 
 urlpatterns = [
     path('', include(router.urls)),
