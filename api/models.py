@@ -8,7 +8,9 @@ class Inspection(models.Model):
     expiration_date = models.DateField(blank=True, null=True)
     inspected_by = models.CharField(max_length=50, blank=True, null=True)
     inspection_date = models.DateField(blank=True, null=True)
+    owner_id = models.ForeignKey('Owner', on_delete=models.CASCADE)
     vehicle_id = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
+    status = models.IntegerField(null=False, default=0)
 
 
 class InspectionCenter(models.Model):
@@ -31,6 +33,9 @@ class Owner(models.Model):
     owner_info = models.CharField(max_length=50)
     owner_type = models.CharField(max_length=20)
     province = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.owner_info
 
 
 class Upload(models.Model):

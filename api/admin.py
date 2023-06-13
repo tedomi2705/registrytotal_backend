@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Inspection, InspectionCenter, InspectionRecord, Owner, Upload, User, Vehicle
 
 class InspectionAdmin(admin.ModelAdmin):
-    list_display = ('inspection_id', 'certificate_no', 'expiration_date', 'inspected_by', 'inspection_date', 'vehicle_id')
+    list_display = ('inspection_id', 'certificate_no', 'expiration_date', 'inspected_by', 'inspection_date', 'vehicle_id', 'owner_id')
 admin.site.register(Inspection, InspectionAdmin)
 
 class InspectionCenterAdmin(admin.ModelAdmin):
