@@ -164,3 +164,8 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
